@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StreamingMedia, StreamingVideoOptions, StreamingAudioOptions } from '@awesome-cordova-plugins/streaming-media/ngx';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,23 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private streamingMedia: StreamingMedia) {}
 
+  starttheAudio() {
+    const options: StreamingAudioOptions = {
+     successCallback: () => { console.log('Successful streaming'); },
+     errorCallback: () => { console.log('Error'); }, 
+     initFullscreen: false
+    };
+    this.streamingMedia.playAudio('http://soundbible.com/grab.php?id=2196&type=mp3', options);
+  }
+
+  starttheVideo() {
+    const options: StreamingVideoOptions = {
+    successCallback: () => {console.log(); },
+    errorCallback: () => { console.log(); },
+    orientation: 'portrait'
+    };
+    this.streamingMedia.playVideo('http://techslides.com/demos/sample-videos/small.mp4', options);
+  }
 }
